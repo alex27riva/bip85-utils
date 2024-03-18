@@ -13,15 +13,17 @@ bbbbbb  iii pp       88888  555555          ccccc lll iii
 VERSION = '0.0.1'
 
 def main():
-    print(colored(BANNER, 'green'))
-    print(colored(f'      bip85-cli version {VERSION}', 'green'))
-
     parser = argparse.ArgumentParser(description='BIP85 utils')
     parser.add_argument('--master-key', help='Master key')
     parser.add_argument('--mnemonic', help='Mnemonic')
     parser.add_argument('-i', '--index', help='Index (default=0)', type=int, default=0)
     parser.add_argument('-w', '--words', help='12 or 24 words (default=12)', type=int, default=12)
+    parser.add_argument('-q', '--quiet', help="Don't show banner", type=bool, default=False)
     args = parser.parse_args()
+
+    if not args.quiet:
+        print(colored(BANNER, 'green'))
+        print(colored(f'      bip85-cli version {VERSION}', 'green'))
 
     bip85 = Bip85()
 
